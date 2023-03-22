@@ -1,12 +1,12 @@
 class text:
     def __init__(self):
-        
         # create file if it doesnt exist
         # else 
         # open existing file 
 
-        # structure of file (csv)
+        # create structure of file (csv)
         # index, name, score
+
         pass
 
     def read(self, person):

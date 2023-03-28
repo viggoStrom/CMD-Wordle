@@ -28,14 +28,29 @@ class main:
         print(" ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝")
         print("\n")
 
+    def printRow(self, row):
+        sys.stdout.write("              ")  # to center the board
+        for i in range(len(row)):
+            if row != "":
+                if row[i] == self.chosenWord[i]:
+                    sys.stdout.write(
+                        f'| {self.correctPlace(row[i].upper())} ')
+                    pass
+                elif row[i] in self.chosenWord:
+                    sys.stdout.write(
+                        f'| {self.correctLetter(row[i].upper())} ')
+                    pass
+                else:
+                    sys.stdout.write(
+                        f'| {self.wrongLetter(row[i].upper())} ')
+                    pass
+
+        sys.stdout.write("|\n\n")
+        pass
+
     def printBoard(self):
         for row in self.board:
-            sys.stdout.write("              ")  # to center the board
-            for letter in row:
-                if row != "":
-                    sys.stdout.write(f'| {letter.upper()} ')
-
-            sys.stdout.write("|\n\n")
+            self.printRow(row)
             pass
 
         sys.stdout.write("\n")
@@ -52,7 +67,7 @@ class main:
 
     def defineNewWord(self):
         # do stuff with textHandler
-        # except old words so you dont get duplicates
+        # except old words so you dont get duplicates, thats no fun
         pass
 
     def checkInputWord(self):
@@ -77,17 +92,27 @@ class main:
         # secondly for each letter in the guess we'll check if they match with the chosen word's letter
         for i in range(len(response)):
             if response[i] == self.chosenWord[i]:
-                sliceWord((self.chosenWord[i]), i)
+                sliceWord(self.chosenWord[i], i)
                 pass
             elif response[i] in self.chosenWord:
-                sliceWord((response[i]), i)
+                sliceWord(response[i], i)
                 pass
             else:
-                sliceWord((response[i]), i)
+                sliceWord(response[i], i)
                 pass
             pass
 
-        self.activeRow += 1
+        # self.printRow(self.board[self.activeRow])
+
+        if response == self.chosenWord:
+            print("You guessed the word.")
+            raise SystemExit
+
+        if self.activeRow < len(self.board) - 1:
+            self.activeRow += 1
+        else:
+            print("game over")
+            raise SystemExit
 
     def run(self):
         # this loops
@@ -101,7 +126,6 @@ class main:
 
         self.welcome()
         self.printBoard()
-        sys.stdout.write(self.correctPlace("a") + "\n")
         self.checkInputWord()
 
         self.run()

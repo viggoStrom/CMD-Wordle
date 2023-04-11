@@ -4,8 +4,10 @@ import sys
 import time
 from termcolor import colored
 
+from textHandler import text
+textHandler = text()
 
-class main:
+class wordle:
     def __init__(self):
         self.chosenWord = "horse"
         self.board = [
@@ -102,10 +104,16 @@ class main:
                 pass
             pass
 
-        # self.printRow(self.board[self.activeRow])
 
         if response == self.chosenWord:
-            print("You guessed the word.")
+            self.clear()
+            self.welcome()
+            self.printBoard()
+            print(f'Congrats! You guessed the word {self.chosenWord}.\n')
+            time.sleep(.9)
+            name = input("What's your name? For the scoreboard... ")[0:10]
+            # write to file with chosen word, nr. of tries, name
+            textHandler.writeScoreboard(name, self.activeRow + 1, self.chosenWord)
             raise SystemExit
 
         if self.activeRow < len(self.board) - 1:
@@ -114,15 +122,15 @@ class main:
             print("game over")
             raise SystemExit
 
+    # clear terminal
+    def clear(self):
+        os.system("cls")
+        sys.stdout.write("\n")
+
     def run(self):
         # this loops
 
-        # clear terminal
-        def clear():
-            os.system("cls")
-            sys.stdout.write("\n")
-
-        clear()
+        self.clear()
 
         self.welcome()
         self.printBoard()
@@ -131,6 +139,5 @@ class main:
         self.run()
 
 
-mainClass = main()
-
-mainClass.run()
+game = wordle()
+game.run()

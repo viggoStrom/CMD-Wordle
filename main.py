@@ -7,9 +7,10 @@ from termcolor import colored
 from textHandler import text
 textHandler = text()
 
+
 class wordle:
     def __init__(self):
-        self.chosenWord = "horse"
+        self.chosenWord = textHandler.getWord()
         self.board = [
             "     ",
             "     ",
@@ -67,9 +68,36 @@ class wordle:
     def wrongLetter(self, string):
         return colored(string, "red")
 
-    def defineNewWord(self):
-        # do stuff with textHandler
-        # except old words so you dont get duplicates, thats no fun
+    def printScoreBoard(self):
+        entries = textHandler.readScoreboard()
+
+        # sort entries
+        # i.e.the sorting algorithm is here!!!
+
+        print("\nScoreboard:")
+        i = 1
+        for entry in entries:
+            guess = "guesses"
+            if entry["score"] == "1":
+                guess = "guess"
+
+            if entry == entries[len(entries)-1]:
+                print(
+                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()}. (Most recent)')
+                pass
+            else:
+                print(
+                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()}.')
+                pass
+            pass
+
+            if i >= 10:
+                print(
+                    f'\n\t{len(entries)}. {entries[len(entries)-1]["name"]}: {entries[len(entries)-1]["score"]} {guess} at {entries[len(entries)-1]["word"].upper()}. (Most recent)')
+                break
+
+            i = i + 1
+        print("")
         pass
 
     def checkInputWord(self):
@@ -104,26 +132,28 @@ class wordle:
                 pass
             pass
 
+        self.finish()
+
+        self.clear()
+        self.welcome()
+        self.printBoard()
 
         if response == self.chosenWord:
-            self.finish()
-
-            self.clear()
-            self.welcome()
-            self.printBoard()
-
-            print(f'Congrats! You guessed the word {self.chosenWord}.\n')
+            print(
+                f'Congrats! You guessed the word {self.chosenWord.upper()}.\n')
             time.sleep(.9)
-            name = input("What's your name? For the scoreboard... ")[0:10].title()
-            textHandler.writeScoreboard(name, self.activeRow + 1, self.chosenWord, self.time)
+            name = input("What's your name? For the scoreboard... ")[
+                0:10].title()
+            textHandler.writeScoreboard(
+                name, self.activeRow + 1, self.chosenWord, self.time)
 
-            print(textHandler.readScoreboard())
+            self.printScoreBoard()
             raise SystemExit
 
         if self.activeRow < len(self.board) - 1:
             self.activeRow += 1
         else:
-            print("game over")
+            print(f'Game over. The word was {self.chosenWord.upper()}.')
             raise SystemExit
 
     # clear terminal
@@ -135,6 +165,9 @@ class wordle:
         # this loops
 
         self.clear()
+
+        # DEBUG only
+        print(self.chosenWord)
 
         self.welcome()
         self.printBoard()

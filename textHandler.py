@@ -64,10 +64,9 @@ class text:
             pass
         return
 
-    def readWord(self):
+    def getWord(self):
         word = "horse"
         with open(self.wordsLocation, "r") as file:
-            file.readlines()
-            random
+            word = random.choice(file.readline().split(","))
             pass
         return word

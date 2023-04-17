@@ -106,14 +106,18 @@ class wordle:
 
 
         if response == self.chosenWord:
+            self.finish()
+
             self.clear()
             self.welcome()
             self.printBoard()
+
             print(f'Congrats! You guessed the word {self.chosenWord}.\n')
             time.sleep(.9)
-            name = input("What's your name? For the scoreboard... ")[0:10]
-            # write to file with chosen word, nr. of tries, name
-            textHandler.writeScoreboard(name, self.activeRow + 1, self.chosenWord)
+            name = input("What's your name? For the scoreboard... ")[0:10].title()
+
+            textHandler
+            textHandler.writeScoreboard(name, self.activeRow + 1, self.chosenWord, self.time)
             raise SystemExit
 
         if self.activeRow < len(self.board) - 1:
@@ -138,6 +142,14 @@ class wordle:
 
         self.run()
 
+    def initiate(self):
+        self.startTime = time.time()
+        self.run()
+
+    def finish(self):
+        self.endTime = time.time()
+        self.time = self.endTime - self.startTime
+
 
 game = wordle()
-game.run()
+game.initiate()

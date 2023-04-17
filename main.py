@@ -115,9 +115,9 @@ class wordle:
             print(f'Congrats! You guessed the word {self.chosenWord}.\n')
             time.sleep(.9)
             name = input("What's your name? For the scoreboard... ")[0:10].title()
-
-            textHandler
             textHandler.writeScoreboard(name, self.activeRow + 1, self.chosenWord, self.time)
+
+            print(textHandler.readScoreboard())
             raise SystemExit
 
         if self.activeRow < len(self.board) - 1:

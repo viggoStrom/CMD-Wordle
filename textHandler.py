@@ -1,22 +1,26 @@
+import random
+
+
 class text:
     def __init__(self):
-        self.fileLocation = "saves/scoreboard.csv"
+        self.scoreBoardLocation = "saves/scoreboard.csv"
+        self.wordsLocation = "words.csv"
+
+        # TODO
         # create file if it doesnt exist
         # else
         # open existing file
 
         # create structure of file (csv)
-        # name, nr. of tries, word
-
-        # sort by time, frequency of use.
+        # name, nr. of tries, word, time
 
         try:
-            open(self.fileLocation, "x")
+            open(self.scoreBoardLocation, "x")
         except:
             pass
         pass
 
-    def readScoreboard(self, name):
+    def readScoreboard(self):
         # do this later
 
         # with open(self.fileLocation, "r") as file:
@@ -34,13 +38,36 @@ class text:
         #         pass
         #     pass
 
-        
-        return
+        listOfObjects = []
+
+        with open(self.scoreBoardLocation, "r") as file:
+            # print("")
+            for line in file.readlines():
+                # print(line)
+                line = line.split(",")
+                line[3] = line[3][:-2]
+                listOfObjects.append({
+                    "name": line[0],
+                    "score": line[1],
+                    "word": line[2],
+                    "time": line[3],
+                })
+                pass
+            pass
+        return listOfObjects
 
     def writeScoreboard(self, name, score, word, time):
         # if person alrady has score ask if they wanna override it
-        with open(self.fileLocation, "a") as file:
+        with open(self.scoreBoardLocation, "a") as file:
             file.write(f'{name},{score},{word},{time}')
             file.write("\n")
             pass
         return
+
+    def readWord(self):
+        word = "horse"
+        with open(self.wordsLocation, "r") as file:
+            file.readlines()
+            random
+            pass
+        return word

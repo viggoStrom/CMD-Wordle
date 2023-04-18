@@ -17,6 +17,7 @@ class wordle:
             "     ",
             "     ",
             "     ",
+            "     ",
         ]
         self.activeRow = 0
         pass
@@ -167,7 +168,7 @@ class wordle:
         self.clear()
 
         # DEBUG only
-        print(self.chosenWord)
+        # print(self.chosenWord)
 
         self.welcome()
         self.printBoard()

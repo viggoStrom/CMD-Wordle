@@ -6,14 +6,6 @@ class text:
         self.scoreBoardLocation = "saves/scoreboard.csv"
         self.wordsLocation = "words.csv"
 
-        # TODO
-        # create file if it doesnt exist
-        # else
-        # open existing file
-
-        # create structure of file (csv)
-        # name, nr. of tries, word, time
-
         try:
             open(self.scoreBoardLocation, "x")
         except:
@@ -41,9 +33,7 @@ class text:
         listOfObjects = []
 
         with open(self.scoreBoardLocation, "r") as file:
-            # print("")
             for line in file.readlines():
-                # print(line)
                 line = line.split(",")
                 line[3] = line[3][:-2]
                 listOfObjects.append({
@@ -70,3 +60,13 @@ class text:
             word = random.choice(file.readline().split(","))
             pass
         return word
+
+    def checkWord(self, input):
+        boolean = True
+
+        with open(self.wordsLocation, "r") as file:
+            words = file.readline().split(",")
+            if input in words:
+                return True
+            else:
+                return False

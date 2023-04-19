@@ -73,7 +73,21 @@ class wordle:
         entries = textHandler.readScoreboard()
 
         # sort entries
-        # i.e.the sorting algorithm is here!!!
+        # !!! i.e.the sorting algorithm is located here !!!
+        # !!! Can't miss it !!!
+
+        def swap(array, index1, index2):
+            
+            pass
+
+        # index every entry
+        for index in range(len(entries)):
+            entries[index]["index"] = index
+            pass
+
+        for index in range(len(entries)):
+            # stuff
+            pass
 
         print("\nScoreboard:")
         i = 1
@@ -118,7 +132,10 @@ class wordle:
             print("Only five letter words please.\n")
             time.sleep(.8)
             return
-        pass
+        elif not textHandler.checkWord(response):
+            print("Not in word list.")
+            time.sleep(.8)
+            return
 
         # secondly for each letter in the guess we'll check if they match with the chosen word's letter
         for i in range(len(response)):
@@ -144,7 +161,7 @@ class wordle:
                 f'Congrats! You guessed the word {self.chosenWord.upper()}.\n')
             time.sleep(.9)
             name = input("What's your name? For the scoreboard... ")[
-                0:10].title()
+                0:12].title()
             textHandler.writeScoreboard(
                 name, self.activeRow + 1, self.chosenWord, self.time)
 
@@ -155,6 +172,7 @@ class wordle:
             self.activeRow += 1
         else:
             print(f'Game over. The word was {self.chosenWord.upper()}.')
+            self.printScoreBoard()
             raise SystemExit
 
     # clear terminal

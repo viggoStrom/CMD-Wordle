@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import time
+import JSON
 from termcolor import colored
 
 from textHandler import text
@@ -77,7 +78,7 @@ class wordle:
         # !!! Can't miss it !!!
 
         def swap(array, index1, index2):
-            
+
             pass
 
         # index every entry
@@ -85,9 +86,13 @@ class wordle:
             entries[index]["index"] = index
             pass
 
-        for index in range(len(entries)):
-            # stuff
+        oneScore = []
+        for entry in entries:
+            if entry["score"] == 1:
+                oneScore.append(entry)
+                pass
             pass
+        print(oneScore)
 
         print("\nScoreboard:")
         i = 1
@@ -203,5 +208,42 @@ class wordle:
         self.time = self.endTime - self.startTime
 
 
-game = wordle()
-game.initiate()
+# game = wordle()
+# game.initiate()
+
+
+entries = textHandler.readScoreboard()
+
+# sort entries
+# !!! i.e.the sorting algorithm is located here !!!
+# !!! Can't miss it !!!
+
+
+def swap(array, index1, index2):
+
+    pass
+
+
+# index every entry
+for index in range(len(entries)):
+    entries[index]["index"] = index
+pass
+
+scoreCategories = len(["     ", "     ", "     ", "     ", "     ", "     ",])
+
+scores = [[]]*scoreCategories
+
+for i in range(1, scoreCategories+1):
+    for entry in entries:
+        if int(entry["score"]) == i:
+            scores[i-1].append(entry)
+            pass
+        pass
+    pass
+
+with open("output.py","w") as file:
+    file.write(JSON.serialize(scores))
+    pass
+
+# for score in scores[0]:
+#     print(score["score"])

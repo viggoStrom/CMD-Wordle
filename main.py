@@ -1,8 +1,8 @@
+import json
 import os
 import re
 import sys
 import time
-import JSON
 from termcolor import colored
 
 from textHandler import text
@@ -212,6 +212,8 @@ class wordle:
 # game.initiate()
 
 
+
+
 entries = textHandler.readScoreboard()
 
 # sort entries
@@ -233,17 +235,18 @@ scoreCategories = len(["     ", "     ", "     ", "     ", "     ", "     ",])
 
 scores = [[]]*scoreCategories
 
-for i in range(1, scoreCategories+1):
+for i in range(scoreCategories):
     for entry in entries:
-        if int(entry["score"]) == i:
-            scores[i-1].append(entry)
-            pass
+        # print(type(entry["score"]), entry["score"])
+
+        if entry["score"] == str(i+1):
+            print(scores[i])
+            scores[i].append(entry)
+            print(entry)
         pass
     pass
+pass
 
-with open("output.py","w") as file:
-    file.write(JSON.serialize(scores))
+with open("output.json", "w") as file:
+    file.write(json.dumps(scores))
     pass
-
-# for score in scores[0]:
-#     print(score["score"])

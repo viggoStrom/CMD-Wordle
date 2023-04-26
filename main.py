@@ -1,4 +1,3 @@
-import json
 import os
 import re
 import sys
@@ -7,6 +6,22 @@ from termcolor import colored
 
 from textHandler import text
 textHandler = text()
+
+# This is a Python script that simulates the game Wordle,
+# where the player has to guess a five-letter word chosen
+# randomly by the computer. The game board is displayed as
+# six rows of five dashes, which represent the letters of
+# the word. The player has to guess the word within six turns.
+# After each turn, the game board is updated with the letters
+# that match the chosen word in their correct position and
+# the letters that match but are in the wrong position.
+# The player is prompted to enter their guess,
+# and the program checks the guess against the chosen word.
+# If the guess is correct, the game is won.
+# If not, the player is given another turn until they either
+# guess the word correctly or run out of turns.
+# The script also includes a scoreboard that displays the
+# top ten players with the lowest number of guesses.
 
 
 class wordle:
@@ -72,27 +87,18 @@ class wordle:
 
     def printScoreBoard(self):
         entries = textHandler.readScoreboard()
+        latest = entries[len(entries)-1]
 
         # sort entries
         # !!! i.e.the sorting algorithm is located here !!!
         # !!! Can't miss it !!!
 
-        def swap(array, index1, index2):
+        entries = sorted(entries, key=lambda entry: (
+            int(entry["score"]), float(entry["time"])))
 
-            pass
-
-        # index every entry
-        for index in range(len(entries)):
-            entries[index]["index"] = index
-            pass
-
-        oneScore = []
-        for entry in entries:
-            if entry["score"] == 1:
-                oneScore.append(entry)
-                pass
-            pass
-        print(oneScore)
+        # import json
+        # with open("output.json","w") as file:
+        #     file.write(json.dumps(entries))
 
         print("\nScoreboard:")
         i = 1
@@ -101,7 +107,7 @@ class wordle:
             if entry["score"] == "1":
                 guess = "guess"
 
-            if entry == entries[len(entries)-1]:
+            if entry == latest:
                 print(
                     f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()}. (Most recent)')
                 pass
@@ -112,8 +118,12 @@ class wordle:
             pass
 
             if i >= 10:
+                suffix = ""
+                print(entry)
+                if entry == latest:
+                    suffix = " (Most recent)"
                 print(
-                    f'\n\t{len(entries)}. {entries[len(entries)-1]["name"]}: {entries[len(entries)-1]["score"]} {guess} at {entries[len(entries)-1]["word"].upper()}. (Most recent)')
+                    f'\n\t{len(entries)}. {latest["name"]}: {latest["score"]} {guess} at {latest["word"].upper()}.{suffix}')
                 break
 
             i = i + 1
@@ -166,7 +176,9 @@ class wordle:
                 f'Congrats! You guessed the word {self.chosenWord.upper()}.\n')
             time.sleep(.9)
             name = input("What's your name? For the scoreboard... ")[
-                0:12].title()
+                0:16].title()
+            if name == "":
+                name = "Im Lazy"
             textHandler.writeScoreboard(
                 name, self.activeRow + 1, self.chosenWord, self.time)
 
@@ -208,45 +220,5 @@ class wordle:
         self.time = self.endTime - self.startTime
 
 
-# game = wordle()
-# game.initiate()
-
-
-
-
-entries = textHandler.readScoreboard()
-
-# sort entries
-# !!! i.e.the sorting algorithm is located here !!!
-# !!! Can't miss it !!!
-
-
-def swap(array, index1, index2):
-
-    pass
-
-
-# index every entry
-for index in range(len(entries)):
-    entries[index]["index"] = index
-pass
-
-scoreCategories = len(["     ", "     ", "     ", "     ", "     ", "     ",])
-
-scores = [[]]*scoreCategories
-
-for i in range(scoreCategories):
-    for entry in entries:
-        # print(type(entry["score"]), entry["score"])
-
-        if entry["score"] == str(i+1):
-            print(scores[i])
-            scores[i].append(entry)
-            print(entry)
-        pass
-    pass
-pass
-
-with open("output.json", "w") as file:
-    file.write(json.dumps(scores))
-    pass
+game = wordle()
+game.initiate()

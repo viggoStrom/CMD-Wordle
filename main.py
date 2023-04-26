@@ -83,7 +83,7 @@ class wordle:
         return colored(string, "yellow")
 
     def wrongLetter(self, string):
-        return colored(string, "red")
+        return colored(string, "dark_grey")
 
     def printScoreBoard(self):
         entries = textHandler.readScoreboard()

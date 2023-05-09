@@ -1,62 +1,38 @@
 [
     {
-        "name": "one",
-        "score": "1",
-        "word": "yeets",
-        "time": "10.323423423"
+        "name": "Sven",
+        "score": "4",
+        "word": "adieu",
+        "time": "60.5199184417724"
     },
     {
-        "name": "two",
-        "score": "1",
-        "word": "yeets",
-        "time": "12.32342342"
+        "name": "Lesven",
+        "score": "4",
+        "word": "giant",
+        "time": "76.4291188716888"
     },
     {
-        "name": "three",
-        "score": "1",
-        "word": "yeets",
-        "time": "18.323423423"
+        "name": "Sven",
+        "score": "5",
+        "word": "shank",
+        "time": "81.7364630699157"
     },
     {
-        "name": "four",
-        "score": "1",
-        "word": "yeets",
-        "time": "34.323423423"
+        "name": "Svaxel",
+        "score": "5",
+        "word": "wring",
+        "time": "109.8959262371063"
     },
     {
-        "name": "five",
-        "score": "1",
-        "word": "yeets",
-        "time": "1233.323423423"
+        "name": "Axel",
+        "score": "6",
+        "word": "blend",
+        "time": "215.8147625923156"
     },
     {
-        "name": "six",
-        "score": "2",
-        "word": "yeets",
-        "time": "4.43453453"
-    },
-    {
-        "name": "seven",
-        "score": "2",
-        "word": "yeets",
-        "time": "65.43453453"
-    },
-    {
-        "name": "eight",
-        "score": "2",
-        "word": "yeets",
-        "time": "123.43453453"
-    },
-    {
-        "name": "nine",
-        "score": "3",
-        "word": "yeets",
-        "time": "324.43453453"
-    },
-    {
-        "name": "ten",
-        "score": "3",
-        "word": "yeets",
-        "time": "443.43453453"
+        "name": "Viggo",
+        "score": "6",
+        "word": "eagle",
+        "time": "293.71561241149"
     }
 ]

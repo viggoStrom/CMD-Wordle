@@ -93,8 +93,7 @@ class wordle:
         # !!! i.e.the sorting algorithm is located here !!!
         # !!! Can't miss it !!!
 
-        entries = sorted(entries, key=lambda entry: (
-            int(entry["score"]), float(entry["time"])))
+        entries = sorted(entries, key=lambda entry: (int(entry["score"]), float(entry["time"])))
 
         # import json
         # with open("output.json","w") as file:

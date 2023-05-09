@@ -1,4 +1,6 @@
 import random
+import os
+import shutil
 
 
 class text:
@@ -7,7 +9,9 @@ class text:
         self.wordsLocation = "words.csv"
 
         try:
+            os.makedirs("saves")
             open(self.scoreBoardLocation, "x")
+            shutil.copy("defaultScoreboard.csv", self.scoreBoardLocation)
         except:
             pass
         pass
@@ -21,7 +25,7 @@ class text:
         #             print("You're already on the scoreboard. Do you want to replace your score or submit another one? (replace/submit)")
         #             response = input("... ")
         #             if "rep" in response:
-                        
+
         #                 pass
         #             else:
         #                 #print

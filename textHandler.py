@@ -59,15 +59,13 @@ class text:
         return
 
     def getWord(self):
-        word = "horse"
+        word = "horse" # defaults to horse if it cant locate the word list
         with open(self.wordsLocation, "r") as file:
             word = random.choice(file.readline().split(","))
             pass
         return word
 
     def checkWord(self, input):
-        boolean = True
-
         with open(self.wordsLocation, "r") as file:
             words = file.readline().split(",")
             if input in words:

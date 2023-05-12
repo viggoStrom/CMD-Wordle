@@ -3,6 +3,7 @@ import re
 import sys
 import time
 from termcolor import colored
+import math
 
 from textHandler import text
 textHandler = text()
@@ -48,22 +49,24 @@ class wordle:
         print(" ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝")
         print("\n")
 
-    def printRow(self, row):
+    def printRow(self, word):
         sys.stdout.write("              ")  # to center the board
-        for i in range(len(row)):
-            if row != "":
-                if row[i] == self.chosenWord[i]:
-                    sys.stdout.write(
-                        f'| {self.correctPlace(row[i].upper())} ')
-                    pass
-                elif row[i] in self.chosenWord:
-                    sys.stdout.write(
-                        f'| {self.correctLetter(row[i].upper())} ')
-                    pass
-                else:
-                    sys.stdout.write(
-                        f'| {self.wrongLetter(row[i].upper())} ')
-                    pass
+
+        for letter in word:
+            if word == "":
+                sys.stdout.write("|\n\n")
+
+            if letter == self.chosenWord:
+                sys.stdout.write(f'| {self.correctPlace(letter.upper())} ')
+                pass
+
+            elif letter in self.chosenWord:
+                sys.stdout.write(f'| {self.correctLetter(letter.upper())} ')
+                pass
+
+            else:
+                sys.stdout.write(f'| {self.wrongLetter(letter.upper())} ')
+                pass
 
         sys.stdout.write("|\n\n")
         pass
@@ -94,7 +97,6 @@ class wordle:
         # !!! Can't miss it !!!
         entries = sorted(entries, key=lambda entry: (int(entry["score"]), float(entry["time"])))
 
-
         print("\nScoreboard:")
         i = 1
         for entry in entries:
@@ -104,11 +106,11 @@ class wordle:
 
             if entry == latest:
                 print(
-                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()}. (Most recent)')
+                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()} \t ({math.floor(float(entry["time"])*100)/100} s) (Most recent)')
                 pass
             else:
                 print(
-                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()}.')
+                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()} \t ({math.floor(float(entry["time"])*100)/100} s)')
                 pass
             pass
 
@@ -198,7 +200,7 @@ class wordle:
         self.clear()
 
         # DEBUG only
-        # print(self.chosenWord)
+        print(self.chosenWord)
 
         self.welcome()
         self.printBoard()

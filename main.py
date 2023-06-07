@@ -1,3 +1,22 @@
+# 
+# This is a Wordle copy made in Python.
+# The code choses a word at random from
+# a list of approved words which you're
+# supposed to guess. There's logic which
+# handles whether the guessed word is 
+# correct and which letters are correct
+# so that they can be colored an appropriate
+# color for if the letter is even present
+# in the correct word or is in the correct  
+# place. After each guess the entire board
+# (terminal) gets cleared so the board can 
+# be redrawn so it looks cleaner. If you 
+# correctly guess the word or if you fail
+# the leaderboard will be displayed and 
+# if you won, your score will be shown 
+# and you'll se your position.
+# 
+
 import os
 import re
 import sys
@@ -7,22 +26,6 @@ import math
 
 from textHandler import text
 textHandler = text()
-
-# This is a Python script that simulates the game Wordle,
-# where the player has to guess a five-letter word chosen
-# randomly by the computer. The game board is displayed as
-# six rows of five dashes, which represent the letters of
-# the word. The player has to guess the word within six turns.
-# After each turn, the game board is updated with the letters
-# that match the chosen word in their correct position and
-# the letters that match but are in the wrong position.
-# The player is prompted to enter their guess,
-# and the program checks the guess against the chosen word.
-# If the guess is correct, the game is won.
-# If not, the player is given another turn until they either
-# guess the word correctly or run out of turns.
-# The script also includes a scoreboard that displays the
-# top ten players with the lowest number of guesses.
 
 
 class wordle:

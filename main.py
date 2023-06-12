@@ -59,7 +59,7 @@ class wordle:
             if word == "":
                 sys.stdout.write("|\n\n")
 
-            if letter == self.chosenWord:
+            if letter == self.chosenWord[word.index(letter)]:
                 sys.stdout.write(f'| {self.correctPlace(letter.upper())} ')
                 pass
 
@@ -100,6 +100,7 @@ class wordle:
         # !!! Can't miss it !!!
         entries = sorted(entries, key=lambda entry: (int(entry["score"]), float(entry["time"])))
 
+
         print("\nScoreboard:")
         i = 1
         for entry in entries:
@@ -108,8 +109,7 @@ class wordle:
                 guess = "guess"
 
             if entry == latest:
-                print(
-                    f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()} \t ({math.floor(float(entry["time"])*100)/100} s) (Most recent)')
+                print(f'\t{i}. {entry["name"]}: {entry["score"]} {guess} at {entry["word"].upper()} \t ({math.floor(float(entry["time"])*100)/100} s) (Most recent)')
                 pass
             else:
                 print(
@@ -119,11 +119,11 @@ class wordle:
 
             if i >= 10:
                 suffix = ""
-                print(entry)
+        
                 if entry == latest:
                     suffix = " (Most recent)"
                 print(
-                    f'\n\t{len(entries)}. {latest["name"]}: {latest["score"]} {guess} at {latest["word"].upper()}.{suffix}')
+                    f'\n\tLatest: {latest["name"]}: {latest["score"]} {guess} at {latest["word"].upper()}.{suffix}')
                 break
 
             i = i + 1
@@ -203,7 +203,7 @@ class wordle:
         self.clear()
 
         # DEBUG only
-        print(self.chosenWord)
+        # print(self.chosenWord)
 
         self.welcome()
         self.printBoard()

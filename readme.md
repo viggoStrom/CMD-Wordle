@@ -20,3 +20,7 @@ pip install termcolor
 ```bash
 python ./main.py
 ```
+
+## Technologies
+- Python
+- CSV data storage
